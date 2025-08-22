@@ -101,6 +101,9 @@ enum AppSettingsType {
   /// Open the app settings.
   settings,
 
+  /// Open the iOS system settings.
+  iosSystemSettings,
+
   /// Open the audio settings.
   ///
   /// Only supported on Android.

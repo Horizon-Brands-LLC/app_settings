@@ -15,6 +15,9 @@ public class AppSettingsPlugin: NSObject, @preconcurrency FlutterPlugin, UIWindo
         case "openSettings":
             handleOpenSettings(call: call, result: result)
             break
+        case "openIosSystemSettings":
+            openIosSystemSettings()
+            break
         default:
             result(FlutterMethodNotImplemented)
             break
@@ -67,6 +70,16 @@ public class AppSettingsPlugin: NSObject, @preconcurrency FlutterPlugin, UIWindo
             return
         }
         
+        if (UIApplication.shared.canOpenURL(url)) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
+    private func openIosSystemSettings() {
+        guard let url = URL(string: "App-prefs:WIFI") else {
+            return
+        }
+
         if (UIApplication.shared.canOpenURL(url)) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }

@@ -22,4 +22,9 @@ class AppSettings {
   static Future<void> openAppSettingsPanel(AppSettingsPanelType type) {
     return AppSettingsPlatform.instance.openAppSettingsPanel(type);
   }
+
+  /// Open ios system settings.
+  static Future<void> openIosSystemSettings() {
+    return AppSettingsPlatform.instance.openIosSystemSettings();
+  }
 }

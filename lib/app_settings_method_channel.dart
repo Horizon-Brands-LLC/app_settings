@@ -27,4 +27,12 @@ class MethodChannelAppSettings extends AppSettingsPlatform {
       'type': type.name,
     });
   }
+
+  @override
+  Future<void> openIosSystemSettings(
+      {AppSettingsType type = AppSettingsType.iosSystemSettings}) {
+    return methodChannel.invokeMethod<void>('openIosSystemSettings', {
+      'type': type.name,
+    });
+  }
 }
