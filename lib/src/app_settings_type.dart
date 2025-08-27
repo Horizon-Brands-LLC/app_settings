@@ -30,7 +30,7 @@ enum AppSettingsType {
 
   /// Open the Bluetooth settings.
   ///
-  /// Only supported on Android.
+  /// Only supported on Android, but on iOS it opens the System Settings.
   bluetooth,
 
   /// Open the Data Roaming settings.
@@ -75,7 +75,7 @@ enum AppSettingsType {
 
   /// Open the location settings.
   ///
-  /// Only supported on Android.
+  /// Only supported on Android, but on iOS it opens the System Settings.
   location,
 
   /// Open the Lock And Password settings.
@@ -121,7 +121,7 @@ enum AppSettingsType {
 
   /// Open the wifi settings.
   ///
-  /// Only supported on Android.
+  /// Only supported on Android, but on iOS it opens the System Settings.
   wifi,
 
   /// Open the wireless settings.
