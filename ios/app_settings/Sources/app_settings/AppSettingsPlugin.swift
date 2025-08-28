@@ -34,9 +34,13 @@ public class AppSettingsPlugin: NSObject, @preconcurrency FlutterPlugin,
         call: FlutterMethodCall,
         result: @escaping FlutterResult
     ) {
-        let arguments = call.arguments as! [String: Any?]
-        let type = arguments["type"] as! String
-        let preferSystemSettings = arguments["preferSystemSettings"] as Bool?
+        guard let arguments = call.arguments as? [String: Any],
+            let type = arguments["type"] as? String
+        else {
+            return
+        }
+
+        let preferSystemSettings = arguments["preferSystemSettings"] as? Bool
 
         switch type {
         case "notification":
@@ -54,12 +58,14 @@ public class AppSettingsPlugin: NSObject, @preconcurrency FlutterPlugin,
         case "subscriptions":
             if #available(iOS 15.0, *) {
                 Task {
-                    let windowScene =
+                    if let windowScene =
                         UIApplication.shared.connectedScenes.first
                         as? UIWindowScene
-
-                    if windowScene != nil {
-                        await openSubscriptionSettings(windowScene!)
+                    {
+                        await openSubscriptionSettings(
+                            windowScene,
+                            preferSystemSettings: preferSystemSettings ?? false
+                        )
                     } else {
                         openSystemSettings(
                             preferSystemSettings: preferSystemSettings ?? false
@@ -90,6 +96,7 @@ public class AppSettingsPlugin: NSObject, @preconcurrency FlutterPlugin,
             openSystemSettings(
                 preferSystemSettings: preferSystemSettings ?? true
             )
+            result(nil)
             break
         default:
             // Show the default settings as fallback.
